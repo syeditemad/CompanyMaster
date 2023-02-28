@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CompanyMasterList.BAL.MultipleTable_Bind>
+
+@{
+    ViewBag.Title = "Index";
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"];
+    </div>
+}
+<div class="row">
+
+    <div class="col-md-12">
+
+        @{Html.RenderAction("GetCompanyMasterList");}
+        @{Html.RenderAction("FileMasterList");}
+
+      
+
+        @*@{await Html.RenderPartialAsync("_CorrespondenceAddress", Model.aadhaarDetails.ObjCorrespondenceAddress);}
+            <hr />
+            @{await Html.RenderPartialAsync("_PermanentAddress", Model.aadhaarDetails.ObjPermanentAddress);}
+            <hr />*@
+        @*@foreach (var bankModel in Model.lstBankDetails.DefaultIfEmpty())
+                {
+                    await Html.RenderPartialAsync("_BankDetails", bankModel);
+                }
+                @foreach (var dematModel in Model.lstDematDetails.DefaultIfEmpty())
+                {
+                    await Html.RenderPartialAsync("_DematDetails", dematModel);
+                }
+            </div>*@
+    </div>
+</div>

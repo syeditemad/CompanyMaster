@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Sql_PractiseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CompanyMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Companyname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="FileMasters" Relationship="Self.FK__FileMaste__Compa__71D1E811" FromRole="CompanyMaster" ToRole="FileMaster" />
+  </EntityType>
+  <EntityType Name="FileMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <NavigationProperty Name="CompanyMaster" Relationship="Self.FK__FileMaste__Compa__71D1E811" FromRole="FileMaster" ToRole="CompanyMaster" />
+  </EntityType>
+  <Association Name="FK__FileMaste__Compa__71D1E811">
+    <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="0..1" />
+    <End Role="FileMaster" Type="Self.FileMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileMaster">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Sql_PractiseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CompanyMasters" EntityType="Self.CompanyMaster" />
+    <EntitySet Name="FileMasters" EntityType="Self.FileMaster" />
+    <AssociationSet Name="FK__FileMaste__Compa__71D1E811" Association="Self.FK__FileMaste__Compa__71D1E811">
+      <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+      <End Role="FileMaster" EntitySet="FileMasters" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
